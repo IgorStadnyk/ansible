@@ -1,11 +1,14 @@
-- name: Ansible Copy Example Local to Remote
-  hosts: igor
+- name: "copy files"
+  hosts: all
+  become: yes
+  vars:
+    source: /tmp/one.txt
+    dest: /tmp/one.txt
   tasks:
-    - name: copying file with playbook
-      become: true 
+    - name: "Copy file"
       copy:
-        src: ~/tmp/hi.txt
-        dest: /tmp/www/html
+        src: "{{source}}"
+        dest: "{{dest}}"
         owner: igor
-        group: igor        
-        mode: 0644
+        group: root
+        mode: 777   
